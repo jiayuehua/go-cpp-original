@@ -4,7 +4,6 @@
 #include <array>
 #include <functional>
 #include <memory>
-#include <optional>
 #include <utility>
 #include <vector>
 #include "Point.hpp"
@@ -45,10 +44,10 @@ class Board final
     Board & operator= (Board &&) = delete;
 
     std::vector<Chain> getAllEmptyChains ();
-    const std::optional<Stone> & getStoneAt (const PointCoords & coords) const;
+    StoneColor getStoneColorAt (const PointCoords & coords) const;
     bool isOccupiedPoint (const PointCoords & coords);
     bool isValidMove (StoneColor color, const PointCoords & coords) const;
-    void placeStoneAt (const PointCoords & coords, Stone stone);
+    void placeStoneAt (const PointCoords & coords, std::unique_ptr<Stone> stone);
     size_t removeCapturedStones (StoneColor colorToCapture);
 
     //template <typename FnOnVisit>

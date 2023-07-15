@@ -2,7 +2,6 @@
 #define INCL_PLAYER_HPP__
 
 #include <string>
-#include <optional>
 #include <utility>
 #include "IPlayer.hpp"
 #include "Board.fwd.hpp"
@@ -19,7 +18,7 @@ class Player final : public IPlayer
 
     Board * m_pBoard = nullptr; // Non-owning pointer... do NOT delete!
 
-    std::optional<StoneColor> m_stoneColor;
+    StoneColor m_stoneColor;
     std::string m_name;
     Stones m_stones;
     size_t m_capturedCount = 0;

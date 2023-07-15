@@ -3,7 +3,6 @@
 
 #include <iosfwd>
 #include <memory>
-#include <optional>
 #include <vector>
 
 namespace Go
@@ -11,6 +10,7 @@ namespace Go
 
 enum class StoneColor : unsigned char
 {
+    NONE,
     BLACK,
     WHITE
 };
@@ -24,14 +24,14 @@ class Stone final
     static const size_t kDefaultWhiteCount = 20;
 
  private:
-    StoneColor m_color;
+    StoneColor m_color = StoneColor::NONE;
 
  public:
     Stone (StoneColor color) : m_color(color) { }
     ~Stone () = default;
 
-    Stone(const Stone&) = default;
-    Stone & operator= (const Stone&) = default;
+    Stone(const Stone&) = delete;
+    Stone & operator= (const Stone&) = delete;
 
     Stone(Stone && other) = default;
     Stone & operator= (Stone && other) = default;
@@ -39,11 +39,11 @@ class Stone final
     StoneColor getColor () const;
 };
 
-using Stones = std::vector<Stone>;
+using Stones = std::vector<std::unique_ptr<Stone>>;
 
 }
 
-std::ostream & operator<< (std::ostream & out, const std::optional<Go::Stone> & stone);
+std::ostream & operator<< (std::ostream & out, const Go::Stone & stone);
 
 
 #endif /* end of include guard: INCL_STONE_HPP__ */

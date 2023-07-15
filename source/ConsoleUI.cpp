@@ -37,16 +37,11 @@ void printBoard (const Go::Board & board)
         for (size_t j = 0; j < board.BOARD_SIZE; ++j)
         {
             cout << kPointSpacerChar;
-            if (const auto & stone = board.getStoneAt({i, j});
-                stone.has_value())
+            switch (board.getStoneColorAt({i, j}))
             {
-                switch (stone->getColor())
-                {
-                 case StoneColor::BLACK: cout << 'B'; break; //'○'; break;
-                 case StoneColor::WHITE: cout << 'W'; break; //'◙'; break;
-                }
-            } else {
-                cout << kPointChar;
+             case StoneColor::NONE:  cout << kPointChar; break;
+             case StoneColor::BLACK: cout << 'B'; break; //'○'; break;
+             case StoneColor::WHITE: cout << 'W'; break; //'◙'; break;
             }
         }
         cout << kPointSpacerChar << kBorderRightChar << " " << i << endl;
